@@ -1,4 +1,4 @@
-FROM golang:1.23.3 AS builder
+FROM golang:1.20 AS builder
 
 WORKDIR /app
 
@@ -9,12 +9,12 @@ COPY . .
 
 RUN go build -o app cmd/app.go
 
-FROM scratch
 
-# RUN apt-get update && rm -rf /var/lib/apt/lists/*
+FROM debian:bookworm-slim
+
+RUN apt-get update && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-
 COPY --from=builder /app/app .
 
 EXPOSE 8080
