@@ -1,3 +1,3 @@
 module github.com/mradigen/short
 
-go 1.20
+go 1.23.3

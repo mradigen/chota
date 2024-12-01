@@ -21,11 +21,7 @@ func Shorten(s* shortener.Shortener) http.HandlerFunc {
 		}
 
 		// Shorten the URL
-		shortURL, err := s.Shorten(longURL)
-		if err != nil {
-			w.Write([]byte(err.Error()))
-			return
-		}
+		shortURL, _ := s.Shorten(longURL)
 
 		// Respond with the short URL
 		w.Header().Set("Content-Type", "application/json")
