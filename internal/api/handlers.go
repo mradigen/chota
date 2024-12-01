@@ -13,21 +13,18 @@ func Shorten(s* shortener.Shortener) http.HandlerFunc {
 			return
 		}
 
-		// Extract the "url" query parameter
 		longURL := r.URL.Query().Get("url")
 		if longURL == "" {
 			http.Error(w, "Missing 'url' query parameter", http.StatusBadRequest)
 			return
 		}
 
-		// Shorten the URL
 		shortURL, err := s.Shorten(longURL)
 		if err != nil {
 			w.Write([]byte(err.Error()))
 			return
 		}
 
-		// Respond with the short URL
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write([]byte(`{"short_url":"` + shortURL + `"}`))
