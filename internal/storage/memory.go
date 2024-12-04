@@ -24,3 +24,8 @@ func (m* MemoryStorage) Get(slug string) (string, error) {
 
 	return "", ErrNotFound
 }
+
+func (m* MemoryStorage) Close() error {
+	// TODO: Clear m.data
+	return nil
+}

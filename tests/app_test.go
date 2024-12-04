@@ -6,11 +6,15 @@ import (
 	"testing"
 	"time"
 	"github.com/mradigen/short/internal/api"
+	"github.com/mradigen/short/internal/shortener"
+	"github.com/mradigen/short/internal/storage"
 )
 
 func TestApplication(t *testing.T) {
 	go func() {
-		api.Start()
+		store := storage.NewMemory()
+		s := shortener.New(store)
+		api.Start("127.0.0.1", 8080, s)
 	}()
 
 	time.Sleep(1 * time.Second) // Wait for the server to start
