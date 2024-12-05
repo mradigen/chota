@@ -1,16 +1,16 @@
 package api
 
 import (
+	"github.com/mradigen/short/internal/shortener"
 	"net/http"
 	"strconv"
-	"github.com/mradigen/short/internal/shortener"
 )
 
 func Start(address string, port int, s *shortener.Shortener) {
 
 	http.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
-		slug := r.URL.Path[1:];
-		longURL, err := s.Retrieve(slug);
+		slug := r.URL.Path[1:]
+		longURL, err := s.Retrieve(slug)
 		if err != nil {
 			w.Write([]byte(err.Error()))
 			return
@@ -19,7 +19,7 @@ func Start(address string, port int, s *shortener.Shortener) {
 		http.Redirect(w, r, longURL, http.StatusSeeOther)
 	})
 
-	http.HandleFunc("GET /shorten", func (w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("GET /shorten", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodGet {
 			http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 			return
@@ -42,5 +42,5 @@ func Start(address string, port int, s *shortener.Shortener) {
 		_, _ = w.Write([]byte(`{"short_url":"` + shortURL + `"}`))
 	})
 
-	http.ListenAndServe(address + ":" + strconv.Itoa(port), nil)
+	http.ListenAndServe(address+":"+strconv.Itoa(port), nil)
 }

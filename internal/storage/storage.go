@@ -5,8 +5,8 @@ import (
 )
 
 type Storage interface {
-    Save(slug, longURL string) (string, error)
-    Get(slug string) (string, error)
+	Save(slug, longURL string) (string, error)
+	Get(slug string) (string, error)
 	Close() error
 	// Exists(longURL string) (string, error)
 }

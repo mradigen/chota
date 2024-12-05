@@ -8,7 +8,7 @@ func NewMemory() *MemoryStorage {
 	return &MemoryStorage{data: make(map[string]string)}
 }
 
-func (m* MemoryStorage) Save(slug string, u string) (string, error) {
+func (m *MemoryStorage) Save(slug string, u string) (string, error) {
 	if _, ok := m.data[slug]; ok {
 		return "", ErrExists
 	}
@@ -17,7 +17,7 @@ func (m* MemoryStorage) Save(slug string, u string) (string, error) {
 	return slug, nil
 }
 
-func (m* MemoryStorage) Get(slug string) (string, error) {
+func (m *MemoryStorage) Get(slug string) (string, error) {
 	if u, ok := m.data[slug]; ok {
 		return u, nil
 	}
@@ -25,7 +25,7 @@ func (m* MemoryStorage) Get(slug string) (string, error) {
 	return "", ErrNotFound
 }
 
-func (m* MemoryStorage) Close() error {
+func (m *MemoryStorage) Close() error {
 	// TODO: Clear m.data
 	return nil
 }

@@ -1,11 +1,11 @@
 package shortener
 
 import (
-	"github.com/mradigen/short/internal/storage"
-	"net/url"
-	"errors"
 	"crypto/rand"
 	"encoding/base64"
+	"errors"
+	"github.com/mradigen/short/internal/storage"
+	"net/url"
 )
 
 var ErrInvalidURL = errors.New("Invalid URL")
@@ -28,7 +28,7 @@ func generateRandomString(length int) string {
 	return base64.URLEncoding.EncodeToString(bytes)[:length]
 }
 
-func (s *Shortener)Shorten(u string) (string, error) {
+func (s *Shortener) Shorten(u string) (string, error) {
 
 	// Parsing
 	_, err := url.ParseRequestURI(u)
@@ -37,13 +37,14 @@ func (s *Shortener)Shorten(u string) (string, error) {
 	}
 
 	slug, err := s.store.Save(generateRandomString(4), u)
-	if err != nil { return "", nil }
+	if err != nil {
+		return "", nil
+	}
 
 	return slug, nil
-} 
+}
 
-
-func (s *Shortener)Retrieve(slug string) (string, error) {
+func (s *Shortener) Retrieve(slug string) (string, error) {
 
 	u, err := s.store.Get(slug)
 	if err != nil {

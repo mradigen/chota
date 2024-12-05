@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/mradigen/short/internal/api"
+	"github.com/mradigen/short/internal/config"
 	"github.com/mradigen/short/internal/shortener"
 	"github.com/mradigen/short/internal/storage"
-	"github.com/mradigen/short/internal/config"
 )
 
 func main() {
