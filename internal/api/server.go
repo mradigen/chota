@@ -1,9 +1,11 @@
 package api
 
 import (
-	"github.com/mradigen/short/internal/shortener"
 	"net/http"
 	"strconv"
+
+	"github.com/mradigen/short/internal/log"
+	"github.com/mradigen/short/internal/shortener"
 )
 
 func Start(address string, port int, s *shortener.Shortener) {
@@ -42,5 +44,6 @@ func Start(address string, port int, s *shortener.Shortener) {
 		_, _ = w.Write([]byte(`{"short_url":"` + shortURL + `"}`))
 	})
 
+	log.Info("API server listening on " + address + ":" + strconv.Itoa(port))
 	http.ListenAndServe(address+":"+strconv.Itoa(port), nil)
 }

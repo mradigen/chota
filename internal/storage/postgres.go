@@ -3,7 +3,9 @@ package storage
 import (
 	"database/sql"
 	"fmt"
+
 	_ "github.com/lib/pq"
+	"github.com/mradigen/short/internal/log"
 )
 
 type PostgresStorage struct {
@@ -33,8 +35,7 @@ func NewPostgres(connStr string) (*PostgresStorage, error) {
 		return nil, fmt.Errorf("failed to ensure `urls` table exists: %v", err)
 	}
 
-	// TODO: Separate logger
-	fmt.Println("DB connection established")
+	log.Debug("DB connection established")
 
 	return &PostgresStorage{db: db}, nil
 }
