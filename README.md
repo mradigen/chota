@@ -1,4 +1,4 @@
-# URL Shortener
+# short
 
 A URL shortener written in Go. Supporting both in-memory and PostgreSQL storage backends.
 
