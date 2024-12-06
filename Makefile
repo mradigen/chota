@@ -1,7 +1,10 @@
-run:
+deps:
+	go mod tidy
+
+run: deps
 	go run cmd/app.go
 
-build:
+build: deps
 	go build -o short cmd/app.go
 
 test:

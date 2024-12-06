@@ -16,7 +16,7 @@ A URL shortener written in Go. Supporting both in-memory and PostgreSQL storage 
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Deployment](#deployment)
-- [Testing](#testing)
+- [Development](#development)
 - [Contributing](#contributing)
 
 ## Usage
@@ -51,22 +51,22 @@ cd short
 
 1. Build the Docker image:
 
-    ```bash
+    ```sh
     make docker
     ```
 
 2. Copy the `.env.example` file and edit it as needed (refer [configuration](#configuration)):
 
-    ```bash
+    ```sh
     cp .env.example .env
     ```
 
 3. Run the Docker container:
-    ```bash
+    ```sh
     docker run -p 8080:8080 --env-file=.env short
     ```
 
-### Build
+### Native
 
 1. Build the project:
 
@@ -103,15 +103,23 @@ make kubernetes
 
 or
 
-```bash
+```sh
 kubectl apply -f deploy/kubernetes.yml
 ```
 
-## Testing
+## Development
+
+### Run
+
+```sh
+make run
+```
+
+### Testing:
 
 Currently there is a very basic test setup. Run the unit and integration tests using:
 
-```bash
+```sh
 make test
 ```
 
