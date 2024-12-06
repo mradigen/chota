@@ -97,6 +97,12 @@ The application supports environment-based configuration:
 
 Use the provided `kubernetes.yml` file to deploy the application to a Kubernetes cluster:
 
+```sh
+make kubernetes
+```
+
+or
+
 ```bash
 kubectl apply -f deploy/kubernetes.yml
 ```
