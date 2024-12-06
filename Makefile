@@ -12,7 +12,7 @@ docker:
 
 kubernetes:
 	# envsubst applies environment variables like DOCKER_REGISTRY
-	envsubst deploy/kubernetes.yml | kubectl apply -f -
+	cat deploy/kubernetes.yml | envsubst | kubectl apply -f -
 	
 #disallow any parallelism
 .NOTPARALLEL:
