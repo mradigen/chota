@@ -2,11 +2,11 @@ pipeline {
 	agent any
 
 	stages {
-	    stage('Checkout from github.com') {
-	        steps {
-    	        checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/mradigen/short']])
-	        }
-	    }
+	    // stage('Checkout from github.com') {
+	    //     steps {
+    	//         checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/mradigen/short']])
+	    //     }
+	    // }
 	    
 		stage('Build Docker Image') {
 			steps {
