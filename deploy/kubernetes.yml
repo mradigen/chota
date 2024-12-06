@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
                 - name: short
-                  image: ${DOCKER_REGISTRY}short:latest
+                  image: reg.phy0.in/short:latest
                   imagePullPolicy: 'Always'
                   ports:
                       - containerPort: 8080

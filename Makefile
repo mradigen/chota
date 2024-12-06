@@ -11,11 +11,11 @@ test:
 	go test tests/app_test.go -v
 
 docker:
-	docker build -t ${DOCKER_REGISTRY}short .
+	docker build -t short .
 
 kubernetes:
 	# envsubst applies environment variables like DOCKER_REGISTRY
-	cat deploy/kubernetes.yml | envsubst | kubectl apply -f -
+	kubectl apply -f deploy/kubernetes.yml
 	
 #disallow any parallelism
 .NOTPARALLEL:
