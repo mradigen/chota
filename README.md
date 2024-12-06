@@ -111,4 +111,4 @@ make test
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request with your changes. Make sure to follow the project's coding standards and write tests for new features.
+Contributions are highly encouraged! Please open an issue or submit a pull request with your changes.
