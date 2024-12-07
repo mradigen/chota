@@ -2,12 +2,6 @@ pipeline {
 	agent any
 
 	stages {
-	    // stage('Checkout from github.com') {
-	    //     steps {
-    	//         checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/mradigen/short']])
-	    //     }
-	    // }
-	    
 		stage('Build Docker Image') {
 			steps {
 				sh 'docker build -t reg.phy0.in/short .'
@@ -22,7 +16,7 @@ pipeline {
 
 		stage('Deploy deployment and service file') {
 			steps {
-			    withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'minikube', contextName: 'minikube', credentialsId: 'jenkins-secret', namespace: '', serverUrl: 'https://k8s.phy0.in']]) {
+			    withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'default', contextName: 'default', credentialsId: 'k3s-token', namespace: '', serverUrl: 'https://k8s.phy0.in']]) {
     				sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
                     sh 'chmod u+x ./kubectl'
     				sh './kubectl apply -f deploy/kubernetes.yml'

@@ -37,7 +37,7 @@ spec:
         app: short-api
     ports:
         - protocol: TCP
-          port: 80
+          port: 4000
           targetPort: api-port
 ---
 apiVersion: apps/v1
