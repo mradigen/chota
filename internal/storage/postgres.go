@@ -18,16 +18,11 @@ func NewPostgres(connStr string) (*PostgresStorage, error) {
 		return nil, fmt.Errorf("unable to connect to the database: %v", err)
 	}
 
-	log.Debug("DB connected")
-
 	// Test the database connection
 	err = db.Ping()
 	if err != nil {
-		log.Warn("unable to ping the database")
 		return nil, fmt.Errorf("unable to ping the database: %v", err)
 	}
-
-	log.Debug("DB ping complete")
 
 	// Create the "urls" table if it does not exist:
 	_, err = db.Exec(`
@@ -37,7 +32,6 @@ func NewPostgres(connStr string) (*PostgresStorage, error) {
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	)`)
 	if err != nil {
-		log.Warn("failed to ensure `urls` table exists")
 		return nil, fmt.Errorf("failed to ensure `urls` table exists: %v", err)
 	}
 
