@@ -18,11 +18,15 @@ func NewPostgres(connStr string) (*PostgresStorage, error) {
 		return nil, fmt.Errorf("unable to connect to the database: %v", err)
 	}
 
+	log.Debug("DB connected")
+
 	// Test the database connection
 	err = db.Ping()
 	if err != nil {
 		return nil, fmt.Errorf("unable to ping the database: %v", err)
 	}
+
+	log.Debug("DB ping complete")
 
 	// Create the "urls" table if it does not exist:
 	_, err = db.Exec(`
