@@ -23,6 +23,7 @@ func NewPostgres(connStr string) (*PostgresStorage, error) {
 	// Test the database connection
 	err = db.Ping()
 	if err != nil {
+		log.Warn("unable to ping the database")
 		return nil, fmt.Errorf("unable to ping the database: %v", err)
 	}
 
@@ -36,6 +37,7 @@ func NewPostgres(connStr string) (*PostgresStorage, error) {
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	)`)
 	if err != nil {
+		log.Warn("failed to ensure `urls` table exists")
 		return nil, fmt.Errorf("failed to ensure `urls` table exists: %v", err)
 	}
 
