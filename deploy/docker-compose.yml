@@ -1,0 +1,25 @@
+services:
+    short:
+        build:
+            context: ..
+        environment:
+            - DATABASE_URL=postgres://postgres:password@postgres/short?sslmode=disable
+            - STORAGE_MODE=postgres
+            - BIND_ADDRESS=0.0.0.0
+        ports:
+            - ${PORT:-8080}:8080
+        depends_on:
+            - postgres
+        restart: on-failure
+
+    postgres:
+        image: postgres:latest
+        environment:
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_DB=short
+        healthcheck:
+            test: ['CMD', 'pg_isready', '-U', 'postgres']
+            interval: 10s
+            retries: 5
+            timeout: 5s
+            start_period: 30s
