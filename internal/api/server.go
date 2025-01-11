@@ -11,7 +11,7 @@ import (
 func corsMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		origin := r.Header.Get("Origin")
-		if origin == "https://s.phy0.in" || origin == "https://b.phy0.in" || origin == "http://localhost" || origin == "http://127.0.0.1" {
+		if origin == "https://s.phy0.in" || origin == "https://b.phy0.in" || origin == "http://localhost:5173" || origin == "http://127.0.0.1:5173" {
 			w.Header().Set("Access-Control-Allow-Origin", origin)
 			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 			w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
@@ -28,7 +28,7 @@ func corsMiddleware(next http.Handler) http.Handler {
 func Start(address string, port int, s *shortener.Shortener) {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		slug := r.URL.Path[1:]
 		longURL, err := s.Retrieve(slug)
 		if err != nil {
@@ -39,7 +39,7 @@ func Start(address string, port int, s *shortener.Shortener) {
 		http.Redirect(w, r, longURL, http.StatusSeeOther)
 	})
 
-	mux.HandleFunc("GET /shorten", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/shorten", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodGet {
 			http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 			return
