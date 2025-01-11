@@ -26,8 +26,9 @@ func corsMiddleware(next http.Handler) http.Handler {
 }
 
 func Start(address string, port int, s *shortener.Shortener) {
+	mux := http.NewServeMux()
 
-	http.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
 		slug := r.URL.Path[1:]
 		longURL, err := s.Retrieve(slug)
 		if err != nil {
@@ -38,7 +39,7 @@ func Start(address string, port int, s *shortener.Shortener) {
 		http.Redirect(w, r, longURL, http.StatusSeeOther)
 	})
 
-	http.HandleFunc("GET /shorten", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("GET /shorten", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodGet {
 			http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 			return
@@ -62,5 +63,8 @@ func Start(address string, port int, s *shortener.Shortener) {
 	})
 
 	log.Info("API server listening on " + address + ":" + strconv.Itoa(port))
-	http.ListenAndServe(address+":"+strconv.Itoa(port), corsMiddleware(mux))
+	err := http.ListenAndServe(address+":"+strconv.Itoa(port), corsMiddleware(mux))
+	if err != nil {
+		log.Info("Server failed to start: " + err.Error())
+	}
 }
