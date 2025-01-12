@@ -18,7 +18,7 @@ var config *Config
 func Load() *Config {
 	if config == nil {
 		config = &Config{
-			DATABASE_URL: getEnvAsString("DATABASE_URL", "postgres://postgres:password@localhost/short?sslmode=disable"),
+			DATABASE_URL: getEnvAsString("DATABASE_URL", "postgres://postgres:password@localhost/chota?sslmode=disable"),
 			BIND_ADDRESS: getEnvAsString("BIND_ADDRESS", "127.0.0.1"),
 			PORT:         getEnvAsInt("PORT", 8080),
 			DEBUG:        getEnvAsBool("DEBUG", false),

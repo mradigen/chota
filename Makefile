@@ -5,13 +5,13 @@ run: deps
 	go run cmd/app.go
 
 build: deps
-	go build -o short cmd/app.go
+	go build -o chota cmd/app.go
 
 test:
 	go test tests/app_test.go -v
 
 docker:
-	docker build -t short .
+	docker build -t chota .
 
 kubernetes:
 	# envsubst applies environment variables like DOCKER_REGISTRY

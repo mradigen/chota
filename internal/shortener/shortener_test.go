@@ -1,7 +1,7 @@
 package shortener
 
 import (
-	"github.com/mradigen/short/internal/storage"
+	"github.com/mradigen/chota/internal/storage"
 	"testing"
 )
 

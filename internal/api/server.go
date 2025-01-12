@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/mradigen/short/internal/log"
-	"github.com/mradigen/short/internal/shortener"
+	"github.com/mradigen/chota/internal/log"
+	"github.com/mradigen/chota/internal/shortener"
 )
 
 func corsMiddleware(next http.Handler) http.Handler {

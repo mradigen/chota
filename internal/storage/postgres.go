@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	_ "github.com/lib/pq"
-	"github.com/mradigen/short/internal/log"
+	"github.com/mradigen/chota/internal/log"
 )
 
 type PostgresStorage struct {

@@ -1,13 +1,13 @@
 package main
 
 import (
+	"github.com/mradigen/chota/internal/api"
+	"github.com/mradigen/chota/internal/shortener"
+	"github.com/mradigen/chota/internal/storage"
 	"io/ioutil"
 	"net/http"
 	"testing"
 	"time"
-	"github.com/mradigen/short/internal/api"
-	"github.com/mradigen/short/internal/shortener"
-	"github.com/mradigen/short/internal/storage"
 )
 
 func TestApplication(t *testing.T) {
@@ -93,4 +93,3 @@ func TestApplication(t *testing.T) {
 		}
 	})
 }
-

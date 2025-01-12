@@ -1,9 +1,10 @@
-# short
+# chota
 
 A URL shortener written in Go. Supporting both in-memory and PostgreSQL storage backends.
 
 ## TODO
 
+- [ ] Modify in memory storage to use `sync.RWMutex` instead of maps
 - [ ] Create a frontend under `/website`
 - [ ] Return saved slug if URL already exists in Storage
 - [ ] Ability to choose custom slug
@@ -44,8 +45,8 @@ Response:
 Clone the repository:
 
 ```sh
-git clone https://github.com/mradigen/short
-cd short
+git clone https://github.com/mradigen/chota
+cd chota
 ```
 
 ### Docker
@@ -64,7 +65,7 @@ cd short
 
 3. Run the Docker container:
     ```sh
-    docker run -p 8080:8080 --env-file=.env short
+    docker run -p 8080:8080 --env-file=.env chota
     ```
 
 ### Native
@@ -77,7 +78,7 @@ cd short
 
 2. Run:
     ```sh
-    ./short
+    ./chota
     ```
 
 ## Configuration

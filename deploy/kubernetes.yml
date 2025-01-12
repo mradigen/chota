@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: short
+    name: chota
 spec:
     replicas: 3
     selector:
         matchLabels:
-            app: short-api
+            app: chota-api
     template:
         metadata:
             labels:
-                app: short-api
+                app: chota-api
         spec:
             containers:
-                - name: short
-                  image: reg.phy0.in/short:latest
+                - name: chota
+                  image: reg.phy0.in/chota:latest
                   imagePullPolicy: 'Always'
                   ports:
                       - containerPort: 8080
                         name: api-port
                   env:
                       - name: DATABASE_URL
-                        value: 'postgres://short:password@short-db-service/short?sslmode=disable'
+                        value: 'postgres://chota:password@chota-db-service/chota?sslmode=disable'
                       - name: STORAGE_MODE
                         value: 'postgres'
                       - name: BIND_ADDRESS
@@ -30,51 +30,69 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-    name: short-api-service
+    name: chota-api-service
 spec:
-    type: LoadBalancer
     selector:
-        app: short-api
+        app: chota-api
     ports:
         - protocol: TCP
           port: 4000
           targetPort: api-port
 ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: chota-ingress
+spec:
+    tls:
+        - secretName: phy0-in
+    rules:
+        - host: s.phy0.in
+          http:
+              paths:
+                  - path: /
+                    pathType: Prefix
+                    backend:
+                        service:
+                            name: chota-api-service
+                            port:
+                                number: 4000
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: short-db
+    name: chota-db
 spec:
     replicas: 1
     selector:
         matchLabels:
-            app: short-db
+            app: chota-db
     template:
         metadata:
             labels:
-                app: short-db
+                app: chota-db
         spec:
             containers:
-                - name: short-db
+                - name: chota-db
                   image: postgres:latest
                   ports:
                       - containerPort: 5432
                         name: db-port
                   env:
                       - name: POSTGRES_USER
-                        value: 'short'
+                        value: 'chota'
                       - name: POSTGRES_PASSWORD
                         value: 'password'
                       - name: POSTGRES_DB
-                        value: 'short'
+                        value: 'chota'
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: short-db-service
+    name: chota-db-service
 spec:
     selector:
-        app: short-db
+        app: chota-db
     ports:
         - protocol: TCP
           port: 5432

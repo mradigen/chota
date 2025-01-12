@@ -4,7 +4,7 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"errors"
-	"github.com/mradigen/short/internal/storage"
+	"github.com/mradigen/chota/internal/storage"
 	"net/url"
 )
 

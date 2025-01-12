@@ -1,10 +1,10 @@
 services:
-    short:
+    chota:
         build:
             context: ..
         pull_policy: build
         environment:
-            - DATABASE_URL=postgres://postgres:password@postgres/short?sslmode=disable
+            - DATABASE_URL=postgres://postgres:password@postgres/chota?sslmode=disable
             - STORAGE_MODE=postgres
             - BIND_ADDRESS=0.0.0.0
         ports:
@@ -17,7 +17,7 @@ services:
         image: postgres:latest
         environment:
             - POSTGRES_PASSWORD=password
-            - POSTGRES_DB=short
+            - POSTGRES_DB=chota
         healthcheck:
             test: ['CMD', 'pg_isready', '-U', 'postgres']
             interval: 10s

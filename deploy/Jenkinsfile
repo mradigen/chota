@@ -4,13 +4,13 @@ pipeline {
 	stages {
 		stage('Build Docker Image') {
 			steps {
-				sh 'docker build -t reg.phy0.in/short .'
+				sh 'docker build -t reg.phy0.in/chota .'
 			}
 		}
 
 		stage('Push the Docker Image to reg.phy0.in') {
 			steps {
-				sh 'docker push reg.phy0.in/short'
+				sh 'docker push reg.phy0.in/chota'
 			}
 		}
 
