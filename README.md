@@ -9,7 +9,7 @@ A URL shortener written in Go. Supporting both in-memory and PostgreSQL storage 
 - [ ] Return saved slug if URL already exists in Storage
 - [ ] Ability to choose custom slug
 - [ ] Debug logging
-- [ ] Add a `deploy/docker-compose.yml`
+- [x] Add a `deploy/docker-compose.yml`
 
 ## Table of Contents
 
