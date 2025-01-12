@@ -11,7 +11,7 @@ import (
 func corsMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		origin := r.Header.Get("Origin")
-		if origin == "https://s.phy0.in" || origin == "https://b.phy0.in" || origin == "https://k.phy0.in" || origin == "http://localhost:5173" || origin == "http://127.0.0.1:5173" {
+		if origin == "https://c.phy0.in" || origin == "https://b.phy0.in" || origin == "https://k.phy0.in" || origin == "http://localhost:5173" || origin == "http://127.0.0.1:5173" {
 			w.Header().Set("Access-Control-Allow-Origin", origin)
 			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 			w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
