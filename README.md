@@ -4,6 +4,7 @@ A URL shortener written in Go. Supporting both in-memory and PostgreSQL storage 
 
 ## TODO
 
+- [ ] Wait for Postgres DB to come live before trying to connect
 - [ ] Modify in memory storage to use `sync.RWMutex` instead of maps
 - [ ] Create a frontend under `/website`
 - [ ] Return saved slug if URL already exists in Storage
